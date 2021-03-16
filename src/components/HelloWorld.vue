@@ -1,71 +1,50 @@
 <template>
-  <h1>{{ msg }}</h1>
+    <div id="app">
 
-  <p>
-    Recommended IDE setup:
-    <a href="https://code.visualstudio.com/" target="_blank">VSCode</a>
-    +
-    <a
-      href="https://marketplace.visualstudio.com/items?itemName=octref.vetur"
-      target="_blank"
-      >Vetur</a
-    >
-    or
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>
-    (if using
-    <code>&lt;script setup&gt;</code>)
-  </p>
+    <button v-on:click="openModal">Click</button>
 
-  <p>See <code>README.md</code> for more information.</p>
-
-  <p>
-    <a href="https://vitejs.dev/guide/features.html" target="_blank"
-      >Vite Docs</a
-    >
-    |
-    <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Docs</a>
-  </p>
-
-  <button @click="setCount(count + 1)">count is: {{ count }}</button>
-  <p>
-    Edit
-    <code>components/HelloWorld.vue</code> to test hot module replacement.
-  </p>
+    <div id="overlay">
+        <div id="content" v-show="state.showContent">
+          <p>モーダル</p>
+          <button v-on:click="closeModal">Close</button>
+        </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, reactive} from 'vue'
 import { useCount } from '~/composables/count'
+
+interface State {
+  showContent: boolean;
+}
 
 export default defineComponent({
   name: 'HelloWorld',
-  props: {
-    msg: {
-      type: String,
-      required: true,
-    },
-  },
-  setup: () => {
-    const { count, setCount } = useCount()
-    return { count, setCount }
-  },
+  setup () {
+    const state = reactive<State>({
+      showContent: false
+    })
+
+    const openModal = () =>{
+      state.showContent = true
+    }
+
+    const closeModal = () =>{
+      state.showContent = false
+    }
+
+    return {
+      state,
+      openModal,
+      closeModal
+    }
+  }
 })
 </script>
 
 <style scoped>
-a {
-  color: #42b983;
-}
 
-label {
-  margin: 0 0.5em;
-  font-weight: bold;
-}
 
-code {
-  background-color: #eee;
-  padding: 2px 4px;
-  border-radius: 4px;
-  color: #304455;
-}
 </style>
