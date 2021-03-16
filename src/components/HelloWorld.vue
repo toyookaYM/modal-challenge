@@ -1,8 +1,8 @@
 <template>
   <div>
     <button v-on:click="openModal" class="button">OPEN</button>
-    <div id="modalArea" class="modalArea" v-show="state.showContent">
-      <div id="modalBg" class="modalBg" v-on:click="closeModal" ></div>
+    <div class="modalArea" v-if="state.showContent">
+      <div class="modalBg" v-on:click="closeModal" ></div>
       <div class="modalWrapper">
         <div class="modalContents">
           <h1>Here are modal title!</h1>
@@ -46,11 +46,10 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style>
 /* モーダルCSS */
 .modalArea {
   position: fixed;
-  z-index: 10; /*サイトによってここの数値は調整 */
   top: 0;
   left: 0;
   width: 100%;
@@ -74,27 +73,12 @@ export default defineComponent({
   background-color: #fff;
 }
 
-.closeModal {
-  position: absolute;
-  top: 0.5rem;
-  right: 1rem;
-  cursor: pointer;
-}
-
-
-/* 以下ボタンスタイル */
+/*ボタンスタイル */
 .button {
-  padding: 10px;
+	padding: 10px;
   background-color: #fff;
   border: 1px solid #282828;
   border-radius: 2px;
   cursor: pointer;
-}
-
-#openModal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform:translate(-50%,-50%);
 }
 </style>
