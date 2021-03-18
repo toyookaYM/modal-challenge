@@ -10,29 +10,29 @@
     </div>
     <button v-on:click="openModal" class="button">OPEN</button>
     <div class="modalArea" v-if="state.showArea">
-      <div class="modalBg" v-on:click="closeModal" ></div>
-      <div class="modalWrapper modal1" v-if="state.showContent1">
+      <div class="modalBg" v-on:click="closeModalAll" ></div>
+      <div id="modalA" class="modalWrapper modalA" v-if="state.showContent1">
         <div class="modalContents">
           <h1>ModalA</h1>
           <p>Here are modal contents!</p>
         </div>
-         <button v-on:click="closeModal1" class="button">CLOSE</button>
+         <button v-on:click="closeModal" class="button" id="modalAButton">CLOSE</button>
       </div>
 
-      <div class="modalWrapper modal2"  v-if="state.showContent2">
+      <div id="modalB" class="modalWrapper modalB" v-if="state.showContent2">
         <div class="modalContents">
           <h1>ModalB</h1>
           <p>Here are modal contents!</p>
         </div>
-         <button v-on:click="closeModal2" class="button">CLOSE</button>
+         <button v-on:click="closeModal2" class="button" id="modalBButton">CLOSE</button>
       </div>
 
-      <div class="modalWrapper modal3" v-if="state.showContent3">
+      <div id="modalC" class="modalWrapper modalC" v-if="state.showContent3">
         <div class="modalContents">
           <h1>ModalC</h1>
           <p>Here are modal contents!</p>
         </div>
-         <button v-on:click="closeModal3" class="button">CLOSE</button>
+         <button v-on:click="closeModal3" class="button" id="modalCButton">CLOSE</button>
       </div>
     </div>
   </div>
@@ -62,7 +62,6 @@ export default defineComponent({
     })
 
     const openModal = () =>{
-      console.log(state.modalOpenChecks)
       if (state.modalOpenChecks.includes("1")) {
         state.showContent1 = true
       }
@@ -77,28 +76,14 @@ export default defineComponent({
       }
     }
 
-    const closeModal1 = () =>{
-      state.showContent1 = false
-      if(!state.showContent1 && !state.showContent2 && !state.showContent3) {
-        state.showArea = false
-      }
+    const closeModal = (e) =>{
+      if (e.target.id === 'modalAButton') state.showContent1 = false
+      if (e.target.id === 'modalBButton') state.showContent2 = false
+      if (e.target.id === 'modalCButton') state.showContent3 = false
+      if(!state.showContent1 && !state.showContent2 && !state.showContent3) state.showArea = false
     }
 
-    const closeModal2 = () =>{
-      state.showContent2 = false
-      if(!state.showContent1 && !state.showContent2 && !state.showContent3) {
-        state.showArea = false
-      }
-    }
-
-    const closeModal3 = () =>{
-      state.showContent3 = false
-      if(!state.showContent1 && !state.showContent2 && !state.showContent3) {
-        state.showArea = false
-      }
-    }
-
-    const closeModal = () =>{
+    const closeModalAll = () =>{
       state.showContent1 = false
       state.showContent2 = false
       state.showContent3 = false
@@ -109,9 +94,7 @@ export default defineComponent({
       state,
       openModal,
       closeModal,
-      closeModal1,
-      closeModal2,
-      closeModal3
+      closeModalAll
     }
   }
 })
@@ -143,33 +126,14 @@ export default defineComponent({
   padding: 10px 30px;
   background-color: #fff;
 }
-.modalWrapper2 {
-  position: absolute;
-  top: 45%;
-  left: 45%;
-  transform:translate(-50%,-50%);
-  width: 70%;
-  max-width: 500px;
-  padding: 10px 30px;
-  background-color: #fff;
-}
-.modalWrapper3 {
-  position: absolute;
-  top: 55%;
-  left: 55%;
-  transform:translate(-50%,-50%);
-  width: 70%;
-  max-width: 500px;
-  padding: 10px 30px;
-  background-color: #fff;
-}
-.modal1 {
+
+.modalA {
   z-index:1
 }
-.modal2 {
+.modalB {
   z-index:2
 }
-.modal3 {
+.modalC {
   z-index:3
 }
 /*ボタンスタイル */
