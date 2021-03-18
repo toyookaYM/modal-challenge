@@ -24,7 +24,7 @@
           <h1>ModalB</h1>
           <p>Here are modal contents!</p>
         </div>
-         <button v-on:click="closeModal2" class="button" id="modalBButton">CLOSE</button>
+         <button v-on:click="closeModal" class="button" id="modalBButton">CLOSE</button>
       </div>
 
       <div id="modalC" class="modalWrapper modalC" v-if="state.showContent3">
@@ -32,7 +32,7 @@
           <h1>ModalC</h1>
           <p>Here are modal contents!</p>
         </div>
-         <button v-on:click="closeModal3" class="button" id="modalCButton">CLOSE</button>
+         <button v-on:click="closeModal" class="button" id="modalCButton">CLOSE</button>
       </div>
     </div>
   </div>
