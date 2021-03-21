@@ -51,7 +51,7 @@ interface State {
 }
 
 export default defineComponent({
-  name: 'HelloWorld',
+  name: 'Modal',
   setup () {
     const state = reactive<State>({
       showArea: false,
